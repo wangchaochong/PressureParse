@@ -225,6 +225,18 @@ class ParseTaiYa2(object):
                 list.append("低电关闭模式")
             if (num + data)[::-1][2] == "1":
                 list.append("低功耗模式")
+            if (num + data)[::-1][3] == "1":
+                list.append("蓝牙球阀开")
+            if (num + data)[::-1][3] == "0":
+                list.append("蓝牙球阀关")
+            if (num + data.replace("b",""))[::-1][4:6][::-1] == "00":
+                list.append("球阀关闭状态")
+            if (num + data.replace("b",""))[::-1][4:6][::-1] == "01":
+                list.append("球阀开启状态")
+            if (num + data.replace("b",""))[::-1][4:6][::-1] == "10":
+                list.append("球阀转换状态")
+            if (num + data.replace("b",""))[::-1][4:6][::-1] == "11":
+                list.append("球阀未知状态")
         return list
 
     # 解析下行数据
@@ -409,7 +421,7 @@ class ParseTaiYa2(object):
 if __name__ == '__main__':
     aa = ParseTaiYa2()
     # aa.start("AB0F7D0002010C30000000320040FFFF0031000000320040FFFF0032000000320040FFFF0033000000320040FFFF0040000000320040FFFF0041000000320040FFFF0042000000320040FFFF0043000000320040FFFF0050000000320040FFFF0051000000320040FFFF0052000000320040FFFF0053000000320040FFFF001E")
-    # aa.start("ab0458070174560000064a00000270570000064d0000046957000000570000056d58000002650000066e54000003630000076b540000005900000a6b530000086600000042dbb18c41cebf0f3d00a064881d4d0000311e10578b60")
+    # aa.start("ab0419000400000000000000000000000000000000000a340bbb8043")
     while True:
         data = input("请输入：").strip()
         aa.start(data)
